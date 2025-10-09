@@ -1,0 +1,19 @@
+
+
+# Python virtual environments
+.venv/
+env/
+ENV/
+virtualenv/
+
+# Additional virtual environment patterns
+venv/
+.env/
+.python-version
+*env*/
+*venv*/
+.virtualenv/
+
+
+# CSV files
+*.csv
