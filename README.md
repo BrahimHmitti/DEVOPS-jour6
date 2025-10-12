@@ -161,7 +161,7 @@ print("Transform → silver done")
 
 ### Pourquoi
 
-Mesurer la santé de la donnée : complétude, unicité, cohérence inter-sources, validité, exactitude, fraîcheur.  ￼
+Mesurer la santé de la donnée : complétude, unicité, cohérence inter-sources, validité, exactitude, fraîcheur.  
 
 ### Comment
 

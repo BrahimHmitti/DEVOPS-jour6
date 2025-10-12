@@ -1,0 +1,7 @@
+,score
+completeness_email,1.0
+uniqueness_order_id,1.0
+consistency_fk,1.0
+validity_country,1.0
+accuracy_amount,1.0
+freshness_30d,0.8073248407643312

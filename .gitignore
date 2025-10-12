@@ -14,6 +14,13 @@ venv/
 *venv*/
 .virtualenv/
 
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pipelines/__pycache__/
+apps/__pycache__/
+tools/__pycache__/
 
-# CSV files
-*.csv
