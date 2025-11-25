@@ -24,3 +24,18 @@ pipelines/__pycache__/
 apps/__pycache__/
 tools/__pycache__/
 
+# DuckDB files (generated at runtime on Streamlit Cloud)
+*.duckdb
+*.duckdb.wal
+
+# Data files (generated at runtime)
+dataset/*.csv
+quality_report.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+

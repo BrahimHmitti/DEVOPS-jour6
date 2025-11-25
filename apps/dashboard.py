@@ -2,12 +2,47 @@ import duckdb
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import subprocess
+import os
+import sys
 
 # Configuration
 st.set_page_config(page_title="Dashboard Data Quality", layout="wide")
-st.title("📊 Dashboard - Pipeline ETL & Data Quality")
 
-# Connexion DuckDB
+# Header avec branding
+col1, col2 = st.columns([1, 4])
+with col1:
+    st.markdown("### 👨‍💻")
+with col2:
+    st.title("📊 Dashboard - Pipeline ETL & Data Quality")
+    st.markdown("**Brahim Hmitti** - Data Engineer | [GitHub](https://github.com/BrahimHmitti/DEVOPS-jour6)")
+
+# Générer les données automatiquement si la DB n'existe pas (pour Streamlit Cloud)
+@st.cache_resource
+def initialize_database():
+    if not os.path.exists("warehouse.duckdb"):
+        with st.spinner("🔄 Initialisation de la base de données..."):
+            try:
+                # Ajouter le dossier racine au path
+                sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+                
+                # Générer les données
+                subprocess.run(["python", "tools/generate_data.py"], check=True)
+                subprocess.run(["python", "pipelines/extract.py"], check=True)
+                subprocess.run(["python", "pipelines/transform.py"], check=True)
+                subprocess.run(["python", "pipelines/quality.py"], check=True)
+                subprocess.run(["python", "pipelines/load.py"], check=True)
+                
+                st.success("✅ Base de données initialisée avec succès !")
+            except Exception as e:
+                st.error(f"❌ Erreur lors de l'initialisation : {e}")
+                st.stop()
+    return True
+
+# Initialiser la DB
+initialize_database()
+
+# Connexion DuckDB (en lecture seule pour éviter les conflits)
 con = duckdb.connect("warehouse.duckdb", read_only=True)
 
 # === SECTION 1 : KPIs ===
